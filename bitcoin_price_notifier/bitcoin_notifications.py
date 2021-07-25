@@ -51,7 +51,7 @@ def main():
             post_ifttt_webhook(event="bitcoin_price_history", value=format_bitcoin_price_history(bitcoin_price_history))
             bitcoin_price_history = [] # reset the history
 
-        time.sleep(60 * 60)
+        time.sleep(60 * 10)
 
 if __name__ == '__main__':
     main()
