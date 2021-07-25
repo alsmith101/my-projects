@@ -32,9 +32,11 @@ def format_bitcoin_price_history(bitcoin_price_history):
         price = row["price"]
         timestamp = row["timestamp"]
         rows.append(f"{timestamp}: {price}")
-    return rows
+    return '<br>'.join(rows)
 
 def main():
+
+    bitcoin_price_history = []
 
     while True:
 
@@ -43,13 +45,13 @@ def main():
 
         post_ifttt_webhook(event="bitcoin_price_notification", value=price)
 
-        bitcoin_price_history = []
         bitcoin_price_history.append({"price": price, "timestamp": timestamp})
 
-        if len(bitcoin_price_history)>= 5:
+        if len(bitcoin_price_history) >= 5:
             post_ifttt_webhook(event="bitcoin_price_history", value=format_bitcoin_price_history(bitcoin_price_history))
+            bitcoin_price_history = [] # reset the history
 
-        time.sleep(1 * 60)
+        time.sleep(60 * 60)
 
 if __name__ == '__main__':
     main()
