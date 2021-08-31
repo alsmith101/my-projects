@@ -36,6 +36,7 @@ def format_bitcoin_price_history(bitcoin_price_history):
         rows.append(f"{timestamp}: {price}")
     return '<br>'.join(rows)
 
+
 def main():
 
     bitcoin_price_history = []
