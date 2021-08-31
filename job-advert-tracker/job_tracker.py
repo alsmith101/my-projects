@@ -7,6 +7,7 @@ headers = {
       "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15"
 }
 
+
 def scrape_indeed(url):
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -25,7 +26,7 @@ def get_company_name(result):
     string = ""
     company_names = result.findAll("a", attrs={"data-tn-element": "companyName"})
 
-    if len(company_names) == 0 :
+    if len(company_names) == 0:
         company_names = result.findAll("span", {"class": "companyName"})
 
     for name in company_names:
