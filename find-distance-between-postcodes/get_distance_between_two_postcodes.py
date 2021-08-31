@@ -1,11 +1,13 @@
 import requests
+import os
 
+BING_API_KEY = os.environ.get("BING_API_KEY")
 origin_r = requests.get(
     'http://dev.virtualearth.net/REST/v1/Locations',
     params={
         'postalCode': 'RH42DY',
         "countryRegion": "UK",
-        "key": "AvLAa02VsrPE9MphBqV8FoXlBz8BEUrKpUMGGJOLzYeN6kdyojhCGO0lpOAHZBO_",
+        "key": BING_API_KEY,
     })
 
 destination_r = requests.get(
@@ -13,7 +15,7 @@ destination_r = requests.get(
     params={
         'postalCode': 'TW181RB',
         "countryRegion": "UK",
-        "key": "AvLAa02VsrPE9MphBqV8FoXlBz8BEUrKpUMGGJOLzYeN6kdyojhCGO0lpOAHZBO_",
+        "key": BING_API_KEY,
     })
 
 origin_text = origin_r.json()
@@ -35,7 +37,7 @@ r = requests.get(
         'origins': f"{origin_longitude}, {origin_latitude}",
         'destinations': f"{destination_longitude}, {destination_latitude}",
         'travelMode': 'driving',
-        "key": 'AvLAa02VsrPE9MphBqV8FoXlBz8BEUrKpUMGGJOLzYeN6kdyojhCGO0lpOAHZBO_',
+        "key": BING_API_KEY,
     })
 
 print(r.url)
