@@ -1,10 +1,12 @@
 import requests
 import datetime
 import time
+import os
 
 bitcoin_api_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 params = {"CMC_PRO_API_KEY": "440aeb58-9072-4f7c-8ded-48839f9a8927"}
 headers = {"Accept": "application/json"}
+ifttt_key = os.environ.get("ifttt_key")
 
 
 def get_bitcoin_price():
@@ -18,7 +20,7 @@ def get_bitcoin_price():
 
 
 def post_ifttt_webhook(event, value):
-    ifttt_webhook_url = f"https://maker.ifttt.com/trigger/{event}/with/key/m8jvKqBTcnzokdWG7PuVh7iJlmrqOHcI3LXF6aYCOaG"
+    ifttt_webhook_url = f"https://maker.ifttt.com/trigger/{event}/with/key/{ifttt_key}"
     data = {"value1": value}
     try:
         requests.post(ifttt_webhook_url, json=data)
